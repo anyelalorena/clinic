@@ -1,4 +1,4 @@
-package com.consultorio.registro.module;
+package com.clinic.person.module;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -13,79 +13,53 @@ import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
-
 /**
- * The persistent class for the TPER_PERSONA database table.
- * 
+ * The persistent class for the PERSON database table.
  * @author
  */
 @Entity
-@Table(name = "PERSON")
+@Table(name = "PERSONA")
 public class Person implements Serializable  {
 
-	/**
-	 * Atributo de seralizacion
-	 */
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * Atributo que determina el Id de la tabla
-	 */
 	@Id
 	@SequenceGenerator(allocationSize = 1, name = "T implements Serializable _PERSON_ID_GENERATOR", sequenceName = "SEC_PERSON")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TPER_PERSON_ID_GENERATOR")
 	@Column(name = "PERID")
-	private Long idPerson;
+	private Long id;
 
-	/**
-	 * Atributo que determina el numero de identificacion
-	 */
 	@Column(name = "PERIDENTIFICATIONNUMBER")
 	private String identificationNumber;
 	
-	/**
-	 * Atributo que determina el primer nombre
-	 */
 	@Column(name = "PERFIRSTNAME")
 	private String firstName;
-
-	/**
-	 * Atributo que determina el segundo nombre
-	 */
+	
 	@Column(name = "PERSECONDNAME")
 	private String secondName;
-
-	/**
-	 * Atributo que determina el primer apellido
-	 */
+	
 	@Column(name = "PERFIRSTLASTNAME")
 	private String fistLastName;
-
-	/**
-	 * Atributo que determina el segundo apellido
-	 */
+	
 	@Column(name = "PERSECONDLASTNAME")
 	private String secondLastName;
 	
-	/**
-	 * Atributo que determina el número de celular
-	 */
 	@Column(name = "PERPHONENUMBER")
 	private String phoneNumber;
 	
-	/**
-	 * Atributo que determina el tipo de persona
-	 */
 	@Enumerated(value = EnumType.STRING)
-	@Column(name = "PERPERSONTYPE")
+	@Column(name = "PERPERSONTYPEENUM")
 	private PersonTypeEnum personTypeEnum;
-
-	public Long getIdPerson() {
-		return idPerson;
+	
+	@Column(name = "PERDTYPID")
+	private Long dTypId;
+	
+	public Long getId() {
+		return id;
 	}
 
-	public void setIdPerson(Long idPerson) {
-		this.idPerson = idPerson;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getIdentificationNumber() {
@@ -143,10 +117,18 @@ public class Person implements Serializable  {
 	public void setPersonTypeEnum(PersonTypeEnum personTypeEnum) {
 		this.personTypeEnum = personTypeEnum;
 	}
+	
+	public Long getDTypId() {
+		return dTypId;
+	}
+
+	public void setDTypId(Long dTypId) {
+		this.dTypId = dTypId;
+	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(idPerson, identificationNumber, firstName, secondName, fistLastName, secondLastName,phoneNumber, personTypeEnum);
+		return Objects.hash(id, identificationNumber, firstName, secondName, fistLastName, secondLastName,phoneNumber, personTypeEnum, dTypId);
 	}
 
 	@Override
@@ -158,25 +140,27 @@ public class Person implements Serializable  {
 		if (getClass() != obj.getClass())
 			return false;
 		Person other = (Person) obj;
-		return Objects.equals(idPerson, other.idPerson)
+		return Objects.equals(id, other.id)
 				&& Objects.equals(identificationNumber, other.identificationNumber)
 				&& Objects.equals(firstName, other.firstName)
 				&& Objects.equals(secondName, other.secondName)
 				&& Objects.equals(fistLastName, other.fistLastName)
 				&& Objects.equals(secondLastName, other.secondLastName) 
 				&& Objects.equals(phoneNumber, other.phoneNumber) 
-				&& personTypeEnum == other.personTypeEnum;
+				&& Objects.equals(personTypeEnum, other.personTypeEnum)
+				&& Objects.equals(dTypId, other.dTypId);
 	}
 
 	@Override
 	public String toString() {
-		return "Persona [idPerson= " + idPerson + 
+		return "Persona [id= " + id + 
 					  ", identificationNumber= " + identificationNumber + 
 					  ", firstName= " + firstName + 
 					  ", secondName=" + secondName + 
 					  ", fistLastName=" + fistLastName + 
 					  ", secondLastName=" + secondLastName + 
 					  ", phoneNumber=" + phoneNumber + 
-					  ", tipoPersonaEnum=" + personTypeEnum + "]";
+					  ", personTypeEnum=" + personTypeEnum + 
+					  ", dTypId="+ dTypId +"]";
 	}
 }

@@ -1,4 +1,4 @@
-package com.consultorio.registro.module;
+package com.clinic.agenda.module;
 
 import java.io.Serializable;
 import java.util.Objects;
